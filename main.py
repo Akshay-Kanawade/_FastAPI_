@@ -2,9 +2,7 @@
 from fastapi import FastAPI 
 from fastapi.params import Body 
 from pydantic import BaseModel 
-from typing import Optionals
-
-
+from typing import Optional
 
 # Create instance of fast api class. 
 app = FastAPI()   
