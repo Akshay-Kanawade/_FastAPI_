@@ -1,7 +1,8 @@
 # Import FastAPI class
 from fastapi import FastAPI 
 from fastapi.params import Body 
-
+from pydantic import BaseModel 
+from typing import Optional
 
 # Create instance of fast api class. 
 app = FastAPI()   
@@ -34,3 +35,23 @@ def Create_post_from_body(payload: dict = Body(...)):
     return {"data":payload,"message": "Successfully created post. "}
 
 
+# Create pydantic modal
+
+class Post(BaseModel):
+    """Create pydantic modal and add data validation
+    Args:
+        BaseModel (_type_): 
+    """
+    Name : str
+    Text : str
+    Id : int
+    Published : bool = True
+    Rating : Optional[int] = None
+
+
+# get post data from body
+@app.post("/createPost")
+def Create_post(payload: Post):
+    """ Create a post using http post and also validate the data from pydantic model.
+    """
+    return {"data":payload,"message": "Successfully created and validate post data. "}
